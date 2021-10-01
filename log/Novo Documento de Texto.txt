@@ -1,0 +1,8 @@
+arrumações:
+
+
+Autocand +>
+
+arrumar o campo de criação de idade minima e máxima para entrada de apenas números e colocar os anos como notação placeholder
+
+Criar campo com mais possibilidades de capacitação, Ex: precisa de word, excell, ?
