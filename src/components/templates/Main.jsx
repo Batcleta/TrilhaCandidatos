@@ -1,14 +1,14 @@
-import '../style/Main.css'
-import React from 'react'
+import "../style/Main.css";
+import React from "react";
 
-const Conteudo = props => {
-    return (
-        <main className="conteudo">
-            <div className="container">
-                {props.children}
-            </div>
-        </main>
-    )
-}
+const Conteudo = (props) => {
+  const { className } = props;
 
-export default Conteudo
+  return (
+    <main className="conteudo">
+      <div className={className}>{props.children}</div>
+    </main>
+  );
+};
+
+export default Conteudo;

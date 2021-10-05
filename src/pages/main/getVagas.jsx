@@ -34,7 +34,7 @@ const Vagas = (props) => {
   useEffect(() => {
     const fetchPosts = async () => {
       // setLoading(true)
-      const url = "http://localhost:3000/vagas";
+      const url = "https://api.trilhatecnologia.com/vagas";
       const res = await axios.get(
         url,
         {
@@ -98,14 +98,19 @@ const Vagas = (props) => {
     props.history.push("/cadastro");
   };
 
+  function dateToUTC(date) {
+    const data = new Date(date);
+    return data.toLocaleDateString();
+  }
+
   return (
     <Fragment>
-      <Main>
+      <Main className="container">
         {/* {loading ? <p className="loading">Loading...</p> : ""} */}
         <header className="main-header">
           <div className="search-wrapper">
-            <div className="main-title">
-              <h2>Lista de vagas</h2>
+            <div>
+              <h2 className="main-title">Lista de vagas</h2>
             </div>
             <div className="search-include">
               <div className="filter-wrapper">
@@ -134,12 +139,13 @@ const Vagas = (props) => {
             ? posts.map((item, index) => {
                 return (
                   <div className="card-vaga" key={index}>
+                    <small className="small__data">
+                      {`Vaga criada em: ${dateToUTC(item.createdAt)}`}
+                    </small>
                     <div className="card-header">
                       <div>
                         <h3 className="card-title">{item.nomeVaga}</h3>
-                        <h5 className="card-subTitle">
-                          Empresa: {item.vagaEmpresa}
-                        </h5>
+                        <h5 className="card-subTitle">{item.vagaEmpresa}</h5>
                       </div>
 
                       <img
@@ -161,21 +167,38 @@ const Vagas = (props) => {
                           <h4 className="card-subTitle marginb-1em">
                             Descrição da Vaga:
                           </h4>
-                          <p>{`Jornada: ${item.vagaPeriodo}`}</p>
-                          <p>{`Regime de contrato: ${item.regContrato}`}</p>
-                          {item.faixaSalarial ? (
-                            <p>{`${
-                              item.faixaSalarialfinal
-                                ? "Salario inicial entre"
-                                : "Salario inicial"
-                            }: R$ ${item.faixaSalarialInicial} ${
-                              item.faixaSalarialfinal
-                                ? `e R$ ${item.faixaSalarialfinal}`
-                                : ""
-                            }`}</p>
-                          ) : (
-                            ""
-                          )}
+                          <p>{item.vagaDescr}</p>
+                          <div style={{ marginTop: "1rem" }}>
+                            <p>
+                              {
+                                <>
+                                  <strong>Jornada:</strong> {item.vagaPeriodo}
+                                </>
+                              }
+                            </p>
+                            <p>
+                              {
+                                <>
+                                  {" "}
+                                  <strong>Regime de contrato:</strong>{" "}
+                                  {item.regContrato}
+                                </>
+                              }
+                            </p>
+                            {item.faixaSalarial ? (
+                              <p>{`${
+                                item.faixaSalarialfinal
+                                  ? "Salario inicial entre"
+                                  : "Salario inicial"
+                              }: R$ ${item.faixaSalarialInicial} ${
+                                item.faixaSalarialfinal
+                                  ? `e R$ ${item.faixaSalarialfinal}`
+                                  : ""
+                              }`}</p>
+                            ) : (
+                              ""
+                            )}
+                          </div>
                         </div>
                         <div className="button-group">
                           <button
@@ -214,7 +237,11 @@ const Vagas = (props) => {
                           <h4 className="card-subTitle marginb-1em margint-1em">
                             Requerimentos da Vaga:
                           </h4>
-
+                          <p>
+                            {item.residProximo
+                              ? "Residir próximo ao Jd João XXIII"
+                              : ""}
+                          </p>
                           <p>
                             {item.reqExp
                               ? `Experiência mínima de: ${item.reqExpAnos}`
