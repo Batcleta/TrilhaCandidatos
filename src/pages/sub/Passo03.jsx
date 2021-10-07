@@ -22,7 +22,7 @@ const ExpProfissional = (props) => {
 
   const onSubmit = async (data) => {
     // console.log(data);
-    await localStorage.setItem("exProfissional", JSON.stringify(data));
+    await sessionStorage.setItem("exProfissional", JSON.stringify(data));
     props.history.push("/cadastro/passo04");
   };
 

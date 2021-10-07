@@ -23,7 +23,7 @@ const CapacitacaoProf = (props) => {
     const formData = {
       ...data,
     };
-    await localStorage.setItem("capacitacao", JSON.stringify(formData));
+    await sessionStorage.setItem("capacitacao", JSON.stringify(formData));
     props.history.push("/cadastro/passo05");
   };
 

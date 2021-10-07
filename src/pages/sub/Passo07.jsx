@@ -8,7 +8,7 @@ const ConfirmaCand = (props) => {
   const [sending, setSending] = useState(true);
 
   const ls = (item) => {
-    const lsJack = JSON.parse(localStorage.getItem(item));
+    const lsJack = JSON.parse(sessionStorage.getItem(item));
     return lsJack;
   };
 
@@ -72,13 +72,13 @@ const ConfirmaCand = (props) => {
         );
       })
       .then((msg) => {
-        localStorage.removeItem("vagaEscolhida");
-        localStorage.removeItem("comoSoube");
-        localStorage.removeItem("dadosPessoais");
-        localStorage.removeItem("exProfissional");
-        localStorage.removeItem("capacitacao");
-        localStorage.removeItem("motivoDaCandidat");
-        localStorage.removeItem("contato");
+        sessionStorage.removeItem("vagaEscolhida");
+        sessionStorage.removeItem("comoSoube");
+        sessionStorage.removeItem("dadosPessoais");
+        sessionStorage.removeItem("exProfissional");
+        sessionStorage.removeItem("capacitacao");
+        sessionStorage.removeItem("motivoDaCandidat");
+        sessionStorage.removeItem("contato");
       })
       .then((msg) => {
         console.log("usuário enviado com sucesso");

@@ -53,7 +53,7 @@ const CadastroEtapa1 = (props) => {
       idadeCandidato: calcAge(data.dataNascimento),
     };
 
-    await localStorage.setItem("dadosPessoais", JSON.stringify(formData));
+    await sessionStorage.setItem("dadosPessoais", JSON.stringify(formData));
     props.history.push("/cadastro/passo03");
   };
 

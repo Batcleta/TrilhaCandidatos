@@ -2,10 +2,10 @@
 import "../style/GetVagas.scss";
 
 // Dependencies
-import axios from "axios";
 import "font-awesome/css/font-awesome.min.css";
 import { useState, useEffect, Fragment } from "react";
 import { useForm } from "react-hook-form";
+import api from "../../main/axios";
 
 // Templates
 import Main from "../../components/templates/Main";
@@ -34,9 +34,8 @@ const Vagas = (props) => {
   useEffect(() => {
     const fetchPosts = async () => {
       // setLoading(true)
-      const url = "https://api.trilhatecnologia.com/vagas";
-      const res = await axios.get(
-        url,
+      const res = await api.get(
+        "vagas",
         {
           params: {
             // page: page,
@@ -89,12 +88,11 @@ const Vagas = (props) => {
   // const handlePageChange = num => setPage(num - 1)
 
   const escolherVaga = async (id, nome) => {
-    const formData = {
+    const data = {
       idVaga: id,
       nomeVaga: nome,
     };
-    await localStorage.setItem("vagaEscolhida", JSON.stringify(formData));
-
+    await sessionStorage.setItem("vagaEscolhida", JSON.stringify(data));
     props.history.push("/cadastro");
   };
 
@@ -140,6 +138,7 @@ const Vagas = (props) => {
                 return (
                   <div className="card-vaga" key={index}>
                     <small className="small__data">
+                      {/* Data de validade ao invés de data de criação */}
                       {`Vaga criada em: ${dateToUTC(item.createdAt)}`}
                     </small>
                     <div className="card-header">
