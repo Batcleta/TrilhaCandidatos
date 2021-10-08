@@ -81,7 +81,7 @@ const ConteMais = (props) => {
     formData.append("fname", fname);
     formData.append("data", blob);
 
-    const apiUrl = "http://localhost:3006";
+    const apiUrl = "https://api.trilhatecnologia.com";
     const sData = { ...data, videoUrl: `${apiUrl}/public/uploads/${fname}` };
 
     fetch(`${apiUrl}/video`, {
