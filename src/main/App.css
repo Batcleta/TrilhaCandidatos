@@ -39,17 +39,21 @@ code {
 
 .containerCad {
   margin: 0 auto;
-
   display: flex;
   flex-direction: column;
   justify-content: center;
-  max-width: 50%;
   width: 100%;
+  padding: 0.5rem;
 }
 
 @media (min-width: 1280px) {
   .container {
+    max-width: 50%;
     max-width: 1234px;
+  }
+
+  .containerCad {
+    max-width: 50%;
   }
 }
 

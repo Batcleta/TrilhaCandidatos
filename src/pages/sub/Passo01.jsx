@@ -10,7 +10,7 @@ const CadastroEtapa1 = (props) => {
   const onSubmit = async (data) => {
     const formData = { ...data };
 
-    await localStorage.setItem("comoSoube", JSON.stringify(formData));
+    await sessionStorage.setItem("comoSoube", JSON.stringify(formData));
 
     props.history.push("/cadastro/passoMeio");
   };

@@ -60,39 +60,10 @@ const CadastroEtapa1 = (props) => {
   return (
     // {/* "handleSubmit" will validate your inputs before invoking "onSubmit" */ }
     <Fragment>
-      <h2 className="main-title">Conte mais sobre você</h2>
+      <h2 className="main-title">Informações pessoais</h2>
       <h3 className="sub-title">Dados Principais </h3>
 
       <form className="cadastro" onSubmit={handleSubmit(onSubmit)}>
-        {/* nome - nomeCandidato */}
-        <div className="form-group">
-          <label htmlFor="">Primeiro Nome</label>
-          <input
-            type="text"
-            placeholder="Informe seu nome"
-            name="nomeCandidato"
-            ref={register({
-              required: true,
-            })}
-          />
-          <small>{errors.nomeCandidato && "Informe um nome válido "}</small>
-        </div>
-        {/* nome - nomeCandidato */}
-        <div className="form-group">
-          <label htmlFor="">Sobrenome</label>
-          <input
-            type="text"
-            placeholder="Informe seu sobrenome"
-            name="sobrenomeCandidato"
-            ref={register({
-              required: true,
-            })}
-          />
-          <small>
-            {errors.sobrenomeCandidato && "Informe um sobrenome válido "}
-          </small>
-        </div>
-
         {/* nascimento - dataNascimento */}
         <div className="form-group">
           <label htmlFor="">Data de nascimento</label>
@@ -106,7 +77,6 @@ const CadastroEtapa1 = (props) => {
           />
           <small>{errors.dataNascimento && "Escolha uma data"}</small>
         </div>
-
         {/* sexo - sexoCandidato */}
         <div className="form-group">
           <label htmlFor="">Sexo</label>
@@ -124,60 +94,6 @@ const CadastroEtapa1 = (props) => {
           </select>
           <small>{errors.sexoCandidato && "Escolha uma opção válida"}</small>
         </div>
-
-        {/* cpf - cpfCandidato */}
-        <div className="form-group">
-          <label htmlFor="">CPF</label>
-          <input
-            type="text"
-            placeholder="Informe seu CPF"
-            name="cpfCandidato"
-            ref={register({
-              required: true,
-              validate: {
-                cpfCheck: (strCPF) => {
-                  var Soma;
-                  var Resto;
-                  Soma = 0;
-                  if (strCPF == "00000000000") return false;
-
-                  for (let i = 1; i <= 9; i++)
-                    Soma =
-                      Soma + parseInt(strCPF.substring(i - 1, i)) * (11 - i);
-                  Resto = (Soma * 10) % 11;
-
-                  if (Resto == 10 || Resto == 11) Resto = 0;
-                  if (Resto != parseInt(strCPF.substring(9, 10))) return false;
-
-                  Soma = 0;
-                  for (let i = 1; i <= 10; i++)
-                    Soma =
-                      Soma + parseInt(strCPF.substring(i - 1, i)) * (12 - i);
-                  Resto = (Soma * 10) % 11;
-
-                  if (Resto == 10 || Resto == 11) Resto = 0;
-                  if (Resto != parseInt(strCPF.substring(10, 11))) return false;
-                  return true;
-                },
-                // hasCpf: async cpf => {
-
-                //     const resp = await axios.get(`http://localhost:8081/candidato/${cpf}`)
-
-                //     if (resp.data.length !== 0) {
-                //         return false
-                //     }
-
-                // }
-              },
-            })}
-          />
-          <small>
-            {errors.cpfCandidato?.type === "cpfCheck" &&
-              "Informe um cpf válido "}
-          </small>
-          {/* <small>{errors.cpfCandidato?.type === "hasCpf" && "Este Cpf ja foi cadastrado"}</small> */}
-        </div>
-
         {/* naturalidade - naturaCandidato */}
         <div className="form-group">
           <label htmlFor="">Naturalidade</label>
@@ -191,9 +107,7 @@ const CadastroEtapa1 = (props) => {
           />
           <small>{errors.naturaCandidato && "Informe uma naturalidade "}</small>
         </div>
-
         <h3 className="sub-title">Dados Complementares </h3>
-
         {/* estadoCivil - estadoCivil */}
         <div className="form-group">
           <label htmlFor="">Estado civil</label>
@@ -216,7 +130,6 @@ const CadastroEtapa1 = (props) => {
           </select>
           <small>{errors.estadoCivil && "Informe um estado civil"}</small>
         </div>
-
         {/* religião - religiaoCandidato */}
         <div className="form-group">
           <label htmlFor="">Possui Religião? (opcional)</label>
@@ -227,19 +140,16 @@ const CadastroEtapa1 = (props) => {
             ref={register()}
           />
         </div>
-
         {/* fumante - fumante */}
         <div className="form-group check">
           <label htmlFor=""> É fumante? </label>
           <input type="checkbox" name="fumante" ref={register()} />
         </div>
-
         {/* Possui filhos - possuiFilhos */}
         <div className="form-group check">
           <label htmlFor=""> Possui Filhos? </label>
           <input type="checkbox" name="possuiFilhos" ref={register()} />
         </div>
-
         {watchJackson === true ? (
           <Fragment>
             {/* quants filhos - quantosFilhos */}
@@ -292,27 +202,22 @@ const CadastroEtapa1 = (props) => {
         ) : (
           ""
         )}
-
         <h3 className="sub-title">Dados Complementares 2 </h3>
-
         {/* pis - possuiPis */}
         <div className="form-group check">
           <label htmlFor=""> Possui Pis? </label>
           <input type="checkbox" name="possuiPis" ref={register()} />
         </div>
-
         {/* titulo de eleitor - possuiTitulo */}
         <div className="form-group check">
           <label htmlFor=""> Possui Título de Eleitor? </label>
           <input type="checkbox" name="possuiTitulo" ref={register()} />
         </div>
-
         {/* dispensa militr - possuiDispensa */}
         <div className="form-group check">
           <label htmlFor=""> Possui dispensa militar?</label>
           <input type="checkbox" name="possuiDispensa" ref={register()} />
         </div>
-
         {/* cnh - possuiCnh */}
         <div className="form-group check">
           <label htmlFor=""> Possui Carteira de Habilitação? </label>
@@ -348,15 +253,12 @@ const CadastroEtapa1 = (props) => {
         ) : (
           ""
         )}
-
         <h3 className="sub-title">Endereço </h3>
-
         {/* casa própria - residenciapropria */}
         <div className="form-group check">
           <label htmlFor=""> Possui residencia própria? </label>
           <input type="checkbox" name="residenciapropria" ref={register()} />
         </div>
-
         {/* período de moradia- tempoDeMoradia */}
         <div className="form-group">
           <label htmlFor="">A quanto tempo mora na residência atual?</label>
@@ -368,7 +270,6 @@ const CadastroEtapa1 = (props) => {
           />
           <small>{errors.tempoDeMoradia && "Informe um peíodo"}</small>
         </div>
-
         {/* Cep- cepCandidato */}
         <div className="form-group">
           <label htmlFor="">CEP</label>
@@ -382,7 +283,6 @@ const CadastroEtapa1 = (props) => {
           />
           <small>{errors.cepCandidato && "Informe um CEP válido"}</small>
         </div>
-
         {/* logradouro- logradouroCandidato */}
         <div className="form-group">
           <label htmlFor="">Logradouro</label>
@@ -393,7 +293,6 @@ const CadastroEtapa1 = (props) => {
             ref={register({ required: true })}
           />
         </div>
-
         {/* numero- numeroEndereco */}
         <div className="form-group">
           <label htmlFor="">Numero</label>
@@ -407,7 +306,6 @@ const CadastroEtapa1 = (props) => {
             {errors.numeroEndereco && "Informe o numero da residência"}
           </small>
         </div>
-
         {/* bairro- bairroCandidato */}
         <div className="form-group">
           <label htmlFor="">Bairro</label>
@@ -419,7 +317,6 @@ const CadastroEtapa1 = (props) => {
             ref={register({ required: true })}
           />
         </div>
-
         {/* complemento- complementoEndereco */}
         <div className="form-group">
           <label htmlFor="">Complemento (opcional)</label>
@@ -430,7 +327,6 @@ const CadastroEtapa1 = (props) => {
             ref={register()}
           />
         </div>
-
         {/* municipio- municipioCandidato */}
         <div className="form-group">
           <label htmlFor="">Municipio</label>
@@ -442,7 +338,6 @@ const CadastroEtapa1 = (props) => {
             ref={register({ required: true })}
           />
         </div>
-
         {/* uf- ufCandidato */}
         <div className="form-group">
           <label htmlFor="">UF</label>
@@ -454,9 +349,7 @@ const CadastroEtapa1 = (props) => {
             ref={register({ required: true })}
           />
         </div>
-
         <p>revise seus dados antes de continuar</p>
-
         <div className="button-group">
           <Link to="/" className="btn btn-prev">
             Cancelar
