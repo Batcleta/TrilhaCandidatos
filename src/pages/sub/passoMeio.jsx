@@ -120,16 +120,13 @@ const ConteMais = (props) => {
               ></VideoOnPlay>
             )}
 
-            <VideoControls status={status}>
-              {!playing ? (
-                <button className="onPlay" onClick={() => handlePlay()}>
-                  play
-                </button>
-              ) : (
-                <button className="onPause" onClick={() => handlePause()}>
-                  pause
-                </button>
-              )}
+            <VideoControls
+              status={status}
+              playing={playing}
+              onClick={!playing ? handlePlay : handlePause}
+            >
+              <div class="border"></div>
+              <div class="play"></div>
             </VideoControls>
           </VideoContainer>
         ) : (
@@ -344,32 +341,64 @@ const Controls = styled.div`
 
 const VideoControls = styled.div`
   position: absolute;
-  left: 0;
+  left: calc(50% - 3rem);
   transition: 0.3s;
   transform: ${({ status }) =>
     status === "stopped" ? "translateY(-2.5rem)" : "translateY(-3.5rem)"};
   opacity: ${({ status }) => (status === "stopped" ? "1" : "0")};
-  display: grid;
-  justify-content: space-evenly;
-  gap: 1rem;
-  margin-top: -0.3rem;
-  height: 4rem;
-  width: 100%;
 
-  button {
-    width: 5rem;
-    height: 5rem;
+  height: 5.5rem;
+  width: 5.5rem;
+  cursor: pointer;
+  background: white;
+  margin: 0 auto;
+  border-radius: 50%;
+  padding: 0.5rem;
+
+  .border {
+    width: 100%;
+    height: 100%;
+    border: 1px solid #2b438b;
     border-radius: 50%;
-    border: none;
+
+    /* playing */
+    border-top: ${({ playing }) => (playing ? "none" : "")};
+    border-bottom: ${({ playing }) => (playing ? "none" : "")};
+    animation: ${({ playing }) =>
+      playing ? "spin 1.5s ease-in-out infinite" : ""};
+  }
+
+  .play {
+    z-index: 5;
+    position: absolute;
+    top: calc(50% - 1.25rem);
+    left: calc(50% - 0.8rem);
+    box-sizing: border-box;
+    height: 2.5rem;
+    width: 2.5rem;
+
+    border-color: transparent transparent transparent #2b438b;
+    transition: 100ms all ease;
+    will-change: border-width;
     cursor: pointer;
+
+    // play state
+
+    border-style: ${({ playing }) => (playing ? "double" : "solid")};
+    border-width: ${({ playing }) =>
+      playing ? "0px 0 0px 28px" : "20px 0 20px 35px"};
+
+    transform: ${({ playing }) =>
+      playing ? "translate(-1px, 1px)" : "translate(0, 0)"};
   }
 
-  button.onPlay {
-    background-color: green;
-  }
-
-  button.onPause {
-    background-color: yellow;
+  @keyframes spin {
+    0% {
+      transform: rotate(0deg);
+    }
+    100% {
+      transform: rotate(360deg);
+    }
   }
 `;
 
